@@ -74,13 +74,7 @@ export default function Sidebar() {
         <Link href="/work" className="sidebar-link">Work</Link>
       </div>
 
-      {/* Footer */}
-      <div className="sidebar-section" style={{ borderBottom: 'none' }}>
-        <p className="text-xs" style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
-          © 2026 Johan Moreno<br />
-          Made with care.
-        </p>
-      </div>
+
     </aside>
   );
 }
