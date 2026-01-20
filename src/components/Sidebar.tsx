@@ -4,7 +4,7 @@ import NewsletterForm from './NewsletterForm';
 
 export default function Sidebar() {
   return (
-    <aside className="sidebar w-72 min-h-screen fixed left-0 top-0 overflow-y-auto">
+    <aside className="sidebar w-72 h-screen fixed left-0 top-0 overflow-y-auto">
       {/* Logo Section */}
       <div className="logo-section">
         <div className="avatar-container">

@@ -110,6 +110,7 @@ a:hover {
   border-radius: 0;
   outline: none;
   transition: border-color 0.2s ease;
+  min-width: 0;
 }
 
 .subscribe-input:focus {
@@ -153,6 +154,7 @@ a:hover {
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   outline: none;
+  min-width: 0;
 }
 
 .search-input:focus {
