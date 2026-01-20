@@ -4,6 +4,7 @@ import { Post } from "@/types";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 import SocialShare from "@/components/SocialShare";
 import Link from "next/link";
+import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/client";
@@ -60,6 +61,47 @@ async function getPost(slug: string): Promise<Post | null> {
   }
 }
 
+
+
+// Helper to get base URL
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:3000'; // Default for local dev
+};
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  const baseUrl = getBaseUrl();
+  const ogImage = post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined;
+
+  return {
+    title: post.title,
+    description: post.excerpt || `Read ${post.title} on Johan Moreno's Blog`,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      url: `${baseUrl}/post/${post.slug.current}`,
+      images: ogImage ? [{ url: ogImage }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: ogImage ? [ogImage] : [],
+    },
+  };
+}
+
 export default async function PostPage({
   params,
 }: {
@@ -72,7 +114,8 @@ export default async function PostPage({
     notFound();
   }
 
-  const postUrl = `/post/${post.slug.current}`;
+  const baseUrl = getBaseUrl();
+  const postUrl = `${baseUrl}/post/${post.slug.current}`;
 
   return (
     <div className="max-w-2xl">
