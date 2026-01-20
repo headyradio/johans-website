@@ -7,6 +7,7 @@ export default defineConfig({
   title: 'Johan Moreno Blog',
   projectId: 'll6z9y20',
   dataset: 'production',
+  basePath: '/studio',
   plugins: [
     structureTool({
       structure: (S: any) =>
