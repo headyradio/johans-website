@@ -62,6 +62,27 @@ export const postSchema = defineType({
       of: [
         {type: 'block'},
         {
+          name: 'break',
+          type: 'object',
+          title: 'Read More Break',
+          fields: [
+            {
+              name: 'style',
+              type: 'string',
+              title: 'Break Style',
+              initialValue: 'break',
+              hidden: true,
+            }
+          ],
+          preview: {
+             prepare() {
+               return {
+                 title: '--- Read More Break ---'
+               }
+             }
+          }
+        },
+        {
           type: 'image',
           options: {
             hotspot: true,
