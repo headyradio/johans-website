@@ -1,3 +1,11 @@
+export interface Category {
+  title: string;
+  slug: {
+    current: string;
+  };
+  description?: string;
+}
+
 export interface Post {
   _id: string;
   title: string;
@@ -18,6 +26,7 @@ export interface Post {
     name: string;
     image?: any;
   };
+  categories?: Category[];
 }
 
 export interface Page {

@@ -109,6 +109,12 @@ export const postSchema = defineType({
       type: 'reference',
       to: [{type: 'author'}],
     }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'category'}}],
+    }),
   ],
   preview: {
     select: {

@@ -60,6 +60,18 @@ export default function BlogPost({ post, isPreview = true }: BlogPostProps) {
 
   return (
     <article className="blog-post">
+      {/* Category Label */}
+      {post.categories && post.categories.length > 0 && (
+         <div className="mb-3">
+           <Link 
+             href={`/category/${post.categories[0].slug.current}`}
+             className="inline-block bg-[var(--forest-green)] text-[var(--cream)] text-[10px] uppercase tracking-widest px-2 py-1 font-semibold hover:opacity-90 transition-opacity"
+           >
+             {post.categories[0].title}
+           </Link>
+         </div>
+      )}
+
       <h2 className="blog-post-title">
         <Link href={`/post/${post.slug.current}`} className="headline-link">
           {post.title}

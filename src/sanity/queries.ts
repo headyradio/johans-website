@@ -10,6 +10,10 @@ export const getAllPostsQuery = `
     "author": author->{
       name,
       image
+    },
+    "categories": categories[]->{
+      title,
+      slug
     }
   }
 `;
@@ -26,7 +30,38 @@ export const getPostBySlugQuery = `
     "author": author->{
       name,
       image
+    },
+    "categories": categories[]->{
+      title,
+      slug
     }
+  }
+`;
+
+export const getPostsByCategoryQuery = `
+  *[_type == "post" && $slug in categories[]->slug.current] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    excerpt,
+    mainImage,
+    body,
+    "author": author->{
+      name,
+      image
+    },
+    "categories": categories[]->{
+      title,
+      slug
+    }
+  }
+`;
+
+export const getCategoryBySlugQuery = `
+  *[_type == "category" && slug.current == $slug][0] {
+    title,
+    description
   }
 `;
 
