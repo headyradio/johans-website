@@ -100,8 +100,7 @@ export default function BlogPost({ post, isPreview = true }: BlogPostProps) {
                 <div className="mt-6 md:mt-8">
                   <Link 
                     href={`/post/${post.slug.current}`}
-                    className="inline-flex items-center text-sm font-medium border-b border-current pb-0.5 hover:opacity-70 transition-opacity"
-                    style={{ color: 'var(--text-primary)' }}
+                    className="headline-link inline-flex items-center text-sm font-medium"
                   >
                     View the remaining content
                     <svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
