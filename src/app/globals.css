@@ -16,7 +16,8 @@
   --forest-green: #2d4a3e;
 }
 
-@theme inline {
+:root {
+  /* ... existing vars ... */
   --color-background: var(--bg-primary);
   --color-foreground: var(--text-primary);
   --font-sans: var(--font-inter);
@@ -60,6 +61,27 @@ a:hover {
 }
 
 .headline-link:hover {
+  background-size: 100% 2px;
+  color: var(--accent);
+}
+
+/* Read More Link (same effect as headline but flex-friendly) */
+.read-more-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.3s ease, color 0.3s ease;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.read-more-link:hover {
   background-size: 100% 2px;
   color: var(--accent);
 }

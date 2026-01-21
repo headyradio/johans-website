@@ -52,6 +52,12 @@ export default function BlogPost({ post, isPreview = true }: BlogPostProps) {
     ? `${window.location.origin}/post/${post.slug.current}`
     : `/post/${post.slug.current}`;
 
+  // Calculate content to show based on break block
+  const breakIndex = post.body ? post.body.findIndex((block: any) => block._type === 'break') : -1;
+  const contentToShow = post.body && breakIndex !== -1 
+    ? post.body.slice(0, breakIndex) 
+    : post.body;
+
   return (
     <article className="blog-post">
       <h2 className="blog-post-title">
@@ -81,38 +87,22 @@ export default function BlogPost({ post, isPreview = true }: BlogPostProps) {
       )}
       
       <div className="blog-post-content">
-        {(() => {
-          if (!post.body) return null;
-          
-          // Find the index of the break block
-          const breakIndex = post.body.findIndex((block: any) => block._type === 'break');
-          
-          // Determine content to show: all if no break, or sliced up to break
-          const contentToShow = breakIndex !== -1 
-            ? post.body.slice(0, breakIndex) 
-            : post.body;
-
-          return (
-            <>
-              <PortableText value={contentToShow} components={portableTextComponents} />
-              
-              {breakIndex !== -1 && (
-                <div className="mt-6 md:mt-8">
-                  <Link 
-                    href={`/post/${post.slug.current}`}
-                    className="headline-link inline-flex items-center text-sm font-medium"
-                  >
-                    View the remaining content
-                    <svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              )}
-            </>
-          );
-        })()}
+        {post.body && <PortableText value={contentToShow} components={portableTextComponents} />}
       </div>
+
+      {breakIndex !== -1 && (
+        <div className="mt-6 md:mt-8">
+          <Link 
+            href={`/post/${post.slug.current}`}
+            className="read-more-link"
+          >
+            View the remaining content
+            <svg className="ml-2 w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      )}
 
       <div className="flex items-center justify-between mt-6">
         <time className="blog-post-date" dateTime={post.publishedAt}>
