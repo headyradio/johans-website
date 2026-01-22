@@ -65,7 +65,7 @@ export default function BlogPost({ post, isPreview = true }: BlogPostProps) {
          <div className="mb-3">
            <Link 
              href={`/category/${post.categories[0].slug.current}`}
-             className="inline-block bg-[var(--forest-green)] text-white text-[10px] uppercase tracking-widest px-2 py-1 font-semibold hover:opacity-90 transition-opacity"
+             className="category-label"
            >
              {post.categories[0].title}
            </Link>

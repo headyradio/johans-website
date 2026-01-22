@@ -139,6 +139,17 @@ export default async function PostPage({
       </Link>
 
       <article className="blog-post">
+        {/* Category Label */}
+        {post.categories && post.categories.length > 0 && (
+           <div className="mb-3">
+             <Link 
+               href={`/category/${post.categories[0].slug.current}`}
+               className="category-label"
+             >
+               {post.categories[0].title}
+             </Link>
+           </div>
+        )}
         <h1 className="blog-post-title text-4xl">{post.title}</h1>
 
         {/* Main Image */}

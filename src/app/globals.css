@@ -406,3 +406,21 @@ code {
   font-size: 0.9em;
   color: var(--accent);
 }
+
+/* Category Label - Strict Enforcement */
+.category-label {
+  display: inline-block;
+  background-color: var(--forest-green);
+  color: #ffffff !important; /* Force white text using !important */
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.category-label:hover {
+  opacity: 0.9;
+  color: #ffffff !important; /* Ensure hover keeps it white */
+}
